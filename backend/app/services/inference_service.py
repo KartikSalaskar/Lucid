@@ -1,3 +1,5 @@
+from . import explainability_service as xai
+from . import trust_service
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -33,9 +35,13 @@ def predict(gray) -> dict:
     x = eval_tf(ck["img_size"])(Image.fromarray(gray)).unsqueeze(0)
     with torch.no_grad(): p = torch.softmax(m(x), 1)[0]
     i = int(p.argmax()); t1 = time.perf_counter()
+    uncertainty = trust_service.calculate_uncertainty(
+    {c: float(v) for c, v in zip(ck["classes"], p)}
+)
     cam = xai.gradcam_overlay(m, x, i, gray)
     return {"mode": "MODEL (research output, not a diagnosis)", "label": ck["classes"][i],
             "confidence": round(float(p[i]), 4),
+"uncertainty": uncertainty,
             "probs": {c: round(float(v), 4) for c, v in zip(ck["classes"], p)}, "gradcam": cam,
             "model": {"name": ck["arch"], "version": ck["version"], "trained_at": ck["trained_at"],
                       "preprocessing_version": ck["preprocessing_version"],
