@@ -7,12 +7,14 @@ from .config import settings
 from .database.db import Analysis, Session
 from .services import imaging, inference_service
 from .services.imaging import png64
+from .routers.trust import router as trust_router
 
 log = logging.getLogger("api")
 app = FastAPI(title="Medical Imaging Analysis & Quality Platform",
               description="Research/educational only. Not a diagnostic system.")
 app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173"],
                    allow_methods=["*"], allow_headers=["*"])
+app.include_router(trust_router)
 
 def _json(path: str):
     p = Path(path)
