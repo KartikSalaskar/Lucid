@@ -13,7 +13,16 @@ ap.add_argument("--epochs", type=int, default=10); ap.add_argument("--bs", type=
 ap.add_argument("--lr", type=float, default=3e-4); ap.add_argument("--patience", type=int, default=3)
 ap.add_argument("--size", type=int, default=224); ap.add_argument("--out", default="models/classifier.pt")
 ap.add_argument("--version", default="1.0.0"); ap.add_argument("--no-pretrained", action="store_true")
+ap.add_argument("--seed", type=int, default=42)
 a = ap.parse_args()
+import random
+import numpy as np
+random.seed(a.seed)
+np.random.seed(a.seed)
+torch.manual_seed(a.seed)
+torch.use_deterministic_algorithms(True)
+print("seed", a.seed)
+
 S = json.loads(Path(a.splits).read_text()); K = len(S["classes"])
 dl = lambda k, tf, sh: DataLoader(SplitDS(S[k], tf), a.bs, shuffle=sh)
 tr, va = dl("train", train_tf(a.size), True), dl("val", eval_tf(a.size), False)
@@ -41,7 +50,7 @@ for ep in range(a.epochs):
         best, bad = vl, 0
         Path(a.out).parent.mkdir(parents=True, exist_ok=True)
         torch.save({"state": model.state_dict(), "arch": a.arch, "classes": S["classes"], "img_size": a.size,
-                    "version": a.version, "preprocessing_version": PREPROC_VERSION,
+                    "seed": a.seed, "version": a.version, "preprocessing_version": PREPROC_VERSION,
                     "trained_at": datetime.now(timezone.utc).isoformat()}, a.out)
     else:
         bad += 1

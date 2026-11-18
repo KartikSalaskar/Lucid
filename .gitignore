@@ -11,3 +11,14 @@ output/
 dist/
 .vscode/
 *.pyc
+
+trust_artifacts/
+results/
+private_inputs/
+*.npz
+*.npy
+data/test/
+data/processed_new/
+models/*.history.json
+models/history_*.png
+models/metrics.json
