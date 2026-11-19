@@ -2,25 +2,25 @@ Lucid – Temperature Calibration
 
 
 
-1\. What I implemented
+1. What I implemented
 
 
 
-\- Integrated temperature scaling into the backend inference service.
+- Integrated temperature scaling into the backend inference service.
 
-\- Added checkpoint SHA256 validation to ensure the calibration file matches the model.
+- Added checkpoint SHA256 validation to ensure the calibration file matches the model.
 
-\- Updated prediction probabilities using temperature scaling.
+- Updated prediction probabilities using temperature scaling.
 
-\- Added tests to verify calibrated probabilities.
+- Added tests to verify calibrated probabilities.
 
-\- Fixed the frontend to display calibration metadata correctly.
+- Fixed the frontend to display calibration metadata correctly.
 
-\- Verified that the application displays the calibration method, temperature and checkpoint hash.
+- Verified that the application displays the calibration method, temperature and checkpoint hash.
 
 
 
-2\. Setup and Run Commands
+2. Setup and Run Commands
 
 
 
@@ -54,25 +54,25 @@ Observed result:Demo completed successfully.
 
 
 
-3\. Model and Dataset Details
+3. Model and Dataset Details
 
 
 
-\- Model architecture: ResNet18
+- Model architecture: ResNet18
 
-\- Classes: NORMAL and PNEUMONIA
+- Classes: NORMAL and PNEUMONIA
 
-\- Image size: 224 × 224
+- Image size: 224 × 224
 
-\- Preprocessing version: 1.0
+- Preprocessing version: 1.0
 
-\- Dataset: Chest X-ray dataset
+- Dataset: Chest X-ray dataset
 
-\- Split file: `data/processed/splits.json`
+- Split file: `data/processed/splits.json`
 
 
 
-4\. Checkpoint and Split Hashes
+4. Checkpoint and Split Hashes
 
 
 
@@ -92,41 +92,41 @@ Split file SHA256:
 
 
 
-5\. Calibration Details
+5. Calibration Details
 
 
 
-\- Calibration method: Temperature Scaling
+- Calibration method: Temperature Scaling
 
-\- Temperature (T): 1.074348705760295
+- Temperature (T): 1.074348705760295
 
-\- Calibration file: `trust\_artifacts/temperature.json`
+- Calibration file: `trust\_artifacts/temperature.json`
 
-\- Calibration was fitted using the Kermany validation dataset.
+- Calibration was fitted using the Kermany validation dataset.
 
-\- The calibration checkpoint hash matches the classifier checkpoint hash.
-
-
-
-6\. Test Results
+- The calibration checkpoint hash matches the classifier checkpoint hash.
 
 
 
-\- Backend and frontend integration completed.
-
-\- All 42 tests passed.
-
-\- Calibrated probabilities were independently verified.
-
-\- Checkpoint SHA256 validation was successful.
-
-\- Frontend calibration metadata display was verified.
-
-\- Calibration demo ran successfully.
+6. Test Results
 
 
 
-7\. Demo Results
+- Backend and frontend integration completed.
+
+- All 42 tests passed.
+
+- Calibrated probabilities were independently verified.
+
+- Checkpoint SHA256 validation was successful.
+
+- Frontend calibration metadata display was verified.
+
+- Calibration demo ran successfully.
+
+
+
+7. Demo Results
 
 
 
@@ -134,11 +134,11 @@ The demo showed improvements in:
 
 
 
-\- Expected Calibration Error (ECE)
+- Expected Calibration Error (ECE)
 
-\- Brier Score
+- Brier Score
 
-\- Negative Log-Likelihood (NLL)
+- Negative Log-Likelihood (NLL)
 
 
 
@@ -146,15 +146,15 @@ Accuracy remained unchanged, and error-detection AUC values remained unchanged.
 
 
 
-8\. Limitations and Pending Work
+8. Limitations and Pending Work
 
 
 
-\- External-data evaluation is pending until the required NIH inputs and exports are available.
+- External-data evaluation is pending until the required NIH inputs and exports are available.
 
-\- Same-sample comparison and final team handoff are pending.
+- Calibration artifacts have been shared with Nikhitha. Final confirmation and any additional handoff requirements are pending.
 
-\- Further validation is required before using the model outside research evaluation.
+- Further validation is required before using the model outside research evaluation.
 
 
 
